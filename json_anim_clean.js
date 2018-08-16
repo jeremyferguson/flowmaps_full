@@ -35,7 +35,7 @@ function main_screen(){
 		iowadata.network.setMap(map);
 		iowadata.network.setStyle(function(feature){
 			weight = feature.getProperty("weight");
-			if(feature.getProperty("active") == "true"){color = "#02fffa";}
+			if(feature.getProperty("active") == "true"){color = "#4286f4";}
 			else{color = "#00F";}
         	return({
 				strokeColor: color,    

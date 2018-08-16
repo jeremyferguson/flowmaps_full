@@ -1,4 +1,4 @@
-import json,urllib2,polyline
+import json,urllib2,polyline,h5py
 
 def write_json(new_json,fname):
     with open(fname,"w") as myfile:
