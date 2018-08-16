@@ -25,9 +25,8 @@ function load_json(){
 			});
 		});
 		google.maps.event.trigger(map,'resize');
-		setTimeout(function(){makeAnim(size)},3000);
+		setTimeout(function(){makeAnim(size)},2000);
 	})
-
 }
 var animArr =[];
 var size = 0;
@@ -36,7 +35,6 @@ function makeAnim(size){
 	for(var i = 0;i<241;i++){animArr.push([]);}
 	for(var i = 1;i<=size;i++){
 		feat = iowadata.network.getFeatureById(i);
-		lid = feat.getProperty("lid");
 		animArr[0].push(feat.getId());
 		currFrames = feat.getProperty("frames");
 		if(currFrames.length > 1){
@@ -52,7 +50,10 @@ function makeAnim(size){
 	startAnim(frame);
 }
 function startAnim(frame){
-	animId = setInterval(function(){frame = changeFrame(frame,1);},400);
+	frame = changeFrame(frame,1);
+	animId = setInterval(function(){
+		frame = changeFrame(frame,1);},
+	200);
 }
 function changeFrame(frame,direction){
 	var currFrame = frame + direction;
