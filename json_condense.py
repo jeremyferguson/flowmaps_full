@@ -18,7 +18,7 @@ for a in range(len(jsondoc['features'])):
             i+= 1
             break
 print(i)
-for a0 in range(2):
+for a0 in range(1):
     i = 0       
     while i <len(jsondoc['features']):
         j = 0
@@ -28,7 +28,7 @@ for a0 in range(2):
             feat2 = jsondoc['features'][j]
             coords2 = feat2['geometry']['coordinates']
             if i != j:
-                if len(coords1) < 13 and len(coords2) < 13:
+                if len(coords1) < 15 and len(coords2) < 15:
                     if abs(coords1[0][0] - coords2[0][0]) < 0.02 and abs(coords1[0][1] - coords2[0][1]) < 0.02:
                         if (coords1[0][0] == coords2[-1][0] and coords1[0][1] == coords2[-1][1]) :
                             coords1 = coords2 + coords1[1:]

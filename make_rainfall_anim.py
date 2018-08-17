@@ -7,7 +7,7 @@ start = int(round(time.time() * 1000))
 dir_path = os.getcwd()
 json_in = "/exp_net_h4_condensed.geojson"
 h5_in = "/hydrograph_mrms_et_hrrr_1520514000.h5"
-out_fname = "/rainfall_network_anim_normalized.geojson"
+out_fname = "/rainfall_network_anim.geojson"
 
 def normalize(arr):
     _min = min(arr)
@@ -24,13 +24,13 @@ linkids = pd.unique(dataset['LinkID'])
 linkids = np.reshape(linkids,(-1,1))
 times = pd.unique(dataset['TimeI'])
 states = np.reshape(dataset['State0'],(-1,times.size))
-normalized = np.apply_along_axis(normalize,1,states)
-states = normalized
+#normalized = np.apply_along_axis(normalize,1,states)
+#states = normalized
 f.close()
 #print(states.shape)
 #print(linkids.shape)
 flow_ix_class_normalize = [i/7.0 for i in range(8)]
-flow_ix_class = [0.0, 0.2, 0.4, 0.5, 0.6, 1, 1.5, 2.5, 10000000000]
+flow_ix_class = [0.0, 0.3, 0.5, 1, 2, 3, 4, 6, 10000000000]
 def getClassified (_data, _classes = flow_ix_class):
     _return = np.zeros( _data.shape, np.uint8)
     for color_ix in range(len(_classes)-1):
@@ -49,7 +49,7 @@ def write_json(new_json,fname):
     with open(fname,"w") as myfile:
         myfile.write(json.dumps(new_json,separators=(',',':')))
         
-classified = getClassified(states,flow_ix_class_normalize)
+classified = getClassified(states,flow_ix_class)
 inst = np.unique(classified[:,0],return_counts = True)[1]
 print(inst)
 #print(np.amin(classified))
