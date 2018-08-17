@@ -1,7 +1,7 @@
 iowadata.network.setMap(null);
 palette = ["#bfffe9","#50d2fa","#00a6d4","#0072e0","#ffdf00","#ffa000","#ff4502","#8b0000"];
 function load_json(){
-	$.getJSON("http://localhost:8000/rainfall_network_anim.geojson",function(a){
+	$.getJSON("http://localhost:8000/rainfall_network_anim_normalized.geojson",function(a){
 		a.features.forEach(function(a) {
 			a.geometry.coordinates = google.maps.geometry.encoding.decodePath(a.geometry.coordinates);
 			a.geometry.coordinates = a.geometry.coordinates.map(function(a) {
@@ -47,15 +47,24 @@ function makeAnim(size){
 			}
 		}
 	}
-	startAnim(frame);
+	playAnim();
 }
-function startAnim(frame){
+function playAnim(){
 	frame = changeFrame(frame,1);
 	setTimeout(function(){
 		animId = setInterval(function(){
 			frame = changeFrame(frame,1);},
 		100);},
 	1000);
+}
+function pauseAnim(){
+	clearInterval(animId);
+}
+function nextFrame(){
+	frame = changeFrame(frame,1);
+}
+function prevFrame(){
+	frame = changeFrame(frame,-1);
 }
 function changeFrame(frame,direction){
 	var currFrame = frame + direction;

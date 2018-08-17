@@ -30,7 +30,7 @@ f.close()
 #print(states.shape)
 #print(linkids.shape)
 flow_ix_class_normalize = [i/7.0 for i in range(8)]
-flow_ix_class = [0.0, 0.3, 0.5, 1, 2, 3, 4, 6, 10000000000]
+flow_ix_class = [0.0, 0.2, 0.5, 1, 2, 3, 4, 8, 10000000000]
 def getClassified (_data, _classes = flow_ix_class):
     _return = np.zeros( _data.shape, np.uint8)
     for color_ix in range(len(_classes)-1):
